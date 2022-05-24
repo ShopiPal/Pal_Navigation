@@ -1,4 +1,6 @@
 <launch>
+
+    
     <!-- Map File -->
     <arg name="map_file" default="$(find pal_navigation_pkg)/maps/try.yaml"/>
     <!-- Map Server -->
@@ -9,6 +11,7 @@
     <!-- Add AMCL example for differential drive robots for Localization -->
     <!-- Subscribe: /scan, /tf, /initialpose, /map -->
     <!-- Publish: /amcl_pose, /particlecloud, /tf -->
+
     
     <node pkg="amcl" type="amcl" name="amcl" output="screen">
     <!-- Publish scans from best pose at a max of 10 Hz -->
@@ -54,8 +57,9 @@
       <rosparam file="$(find pal_navigation_pkg)/param/costmap_common_params.yaml" command="load" ns="local_costmap" />
       <rosparam file="$(find pal_navigation_pkg)/param/local_costmap_params.yaml" command="load" ns="local_costmap" />
       <rosparam file="$(find pal_navigation_pkg)/param/global_costmap_params.yaml" command="load" ns="global_costmap" />
-      <rosparam file="$(find pal_navigation_pkg)/param/base_local_planner_params.yaml" command="load" />
+      <rosparam file="$(find pal_navigation_pkg)/param/move_base_params.yaml" command="load" />
     </node>
+
 
 
 
