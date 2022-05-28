@@ -3,7 +3,7 @@
 
 
     <!-- Map File -->
-    <arg name="map_file" default="$(find pal_navigation_pkg)/maps/try.yaml"/>
+    <arg name="map_file" default="$(find pal_navigation_pkg)/maps/demo_map.yaml"/>
     <!-- Map Server -->
     <!-- Publish: /map, /map_metadata -->
     <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)" />
