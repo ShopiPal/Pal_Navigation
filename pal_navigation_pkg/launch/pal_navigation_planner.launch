@@ -53,19 +53,28 @@
     <!-- Subscribe: /move_base_simple/goal -->
     <!-- Publish: /cmd_vel -->
     <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
-      <rosparam file="$(find pal_navigation_pkg)/param/costmap_common_params.yaml" command="load" ns="global_costmap" />
-      <rosparam file="$(find pal_navigation_pkg)/param/costmap_common_params.yaml" command="load" ns="local_costmap" />
-      <rosparam file="$(find pal_navigation_pkg)/param/local_costmap_params.yaml" command="load" ns="local_costmap" />
-      <rosparam file="$(find pal_navigation_pkg)/param/global_costmap_params.yaml" command="load" ns="global_costmap" />
-      <rosparam file="$(find pal_navigation_pkg)/param/move_base_params.yaml" command="load" />
+
+      <rosparam file="$(find pal_navigation_pkg)/param/move_base_basic.yaml" command="load" />
+
+      <!-- # planner global -->
+      <rosparam file="$(find pal_navigation_pkg)/param/planners/Global_NavfnPlanner.yaml" command="load" />
+
+      <!-- # planner local -->
+      <rosparam file="$(find pal_navigation_pkg)/param/planners/Local_DWAPlanner.yaml" command="load" />
+
+      <!-- # costmap common -->
+      <rosparam file="$(find pal_navigation_pkg)/param/costmap/common_costmap_params.yaml" command="load" ns="global_costmap" />
+      <rosparam file="$(find pal_navigation_pkg)/param/costmap/common_costmap_params.yaml" command="load" ns="local_costmap" />
+
+      <!-- # costmap global -->
+      <rosparam file="$(find pal_navigation_pkg)/param/costmap/global_costmap_params.yaml" command="load" ns="global_costmap" />
+
+      <!-- # costmap local -->
+      <rosparam file="$(find pal_navigation_pkg)/param/costmap/local_costmap_params.yaml" command="load" ns="local_costmap" />
+
+
+      
     </node>
-
-
-
-
-
-    
-
 
 
 </launch>
