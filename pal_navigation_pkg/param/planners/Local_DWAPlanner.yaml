@@ -9,26 +9,26 @@ DWAPlannerROS:
   # accel:
   acc_lim_x: 1 # The x acceleration limit of the robot in meters/sec^2
   acc_lim_y: 0 # diff drive robot
-  acc_lim_th: 2 # The rotational acceleration limit of the robot in radians/sec^2
+  acc_lim_th: 1 # The rotational acceleration limit of the robot in radians/sec^2
 
   # vel:
-  max_vel_x: 0.18 # The maximum x velocity for the robot in m/s
-  min_vel_x: -0.1 # The minimum x velocity for the robot in m/s, negative for backwards motion
+  max_vel_x: 0.2 # The maximum x velocity for the robot in m/s
+  min_vel_x: -0.11 # The minimum x velocity for the robot in m/s, negative for backwards motion
   max_vel_y: 0 # diff drive robot
   min_vel_y: 0 # diff drive robot
-  max_rot_vel: 1  # choose slightly less than the base's capability
-  min_rot_vel: 0.1  # this is the min angular velocity when there is negligible translational velocity
-  max_trans_vel: 0.5 # choose slightly less than the base's capability
-  min_trans_vel: 0.1  # this is the min trans velocity when there is negligible rotational velocity
+  max_vel_theta: 0.50  # choose slightly less than the base's capability
+  min_vel_theta: 0.1  # this is the min angular velocity when there is negligible translational velocity
+  max_vel_trans: 0.45 # choose slightly less than the base's capability
+  min_vel_trans: 0.1  # this is the min trans velocity when there is negligible rotational velocity
 
   ## Goal Tolerance Parameters ##
   # yaw_goal_tolerance: 0.05
   yaw_goal_tolerance: 0.5 # The tolerance in radians for the controller in yaw/rotation when achieving its goal
   xy_goal_tolerance: 0.2 # The tolerance in meters for the controller in the x & y distance when achieving a goal
-  #latch_xy_goal_tolerance: false # If goal tolerance is latched, if the robot ever reaches the goal xy location it will simply rotate in place, even if it ends up outside the goal tolerance while it is doing so.
+  latch_xy_goal_tolerance: false # If goal tolerance is latched, if the robot ever reaches the goal xy location it will simply rotate in place, even if it ends up outside the goal tolerance while it is doing so.
 
   ## Forward Simulation Parameters ##
-  sim_time: 2 # The amount of time to forward-simulate trajectories in seconds
+  sim_time: 2.5 # The amount of time to forward-simulate trajectories in seconds
   sim_granularity: 0.025 # The step size, in meters, to take between points on a given trajectory
   vx_samples: 5 # The number of samples to use when exploring the x velocity space
   vy_samples: 1 # he number of samples to use when exploring the y velocity space

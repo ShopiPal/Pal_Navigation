@@ -1,45 +1,45 @@
 <launch>
-    <!--param name="/use_sim_time" value="true" /-->
+  <!--param name="/use_sim_time" value="true" /-->
+  
+  <!-- Map File -->
+  <arg name="map_file" default="$(find pal_navigation_pkg)/maps/demo_map.yaml"/>
+  <!-- Map Server -->
+  <!-- Publish: /map, /map_metadata -->
+  <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)" />
+
+
+  <!-- AMCL used for localization -->
+  <!-- Subscribe: /scan, /tf, /initialpose, /map -->
+  <!-- Publish: /amcl_pose, /particlecloud, /tf -->
+  <include file="$(find pal_navigation_pkg)/launch/include/pal_amcl_localization.launch" />
+  
+
+
+  <!-- Move Base Node -->
+  <!-- Subscribe: /move_base_simple/goal -->
+  <!-- Publish: /cmd_vel -->
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen" >
+
+    <rosparam file="$(find pal_navigation_pkg)/param/move_base_basic.yaml" command="load" /> 
+
+    <!-- # planner global -->
+    <rosparam file="$(find pal_navigation_pkg)/param/planners/Global_NavfnPlanner.yaml" command="load" />
+
+    <!-- # planner local -->
+    <rosparam file="$(find pal_navigation_pkg)/param/planners/Local_DWAPlanner.yaml" command="load" /> 
+
+    <!-- # costmap common -->
+    <rosparam file="$(find pal_navigation_pkg)/param/costmap/common_costmap_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find pal_navigation_pkg)/param/costmap/common_costmap_params.yaml" command="load" ns="local_costmap" /> 
+
+    <!-- # costmap global -->
+    <rosparam file="$(find pal_navigation_pkg)/param/costmap/global_costmap_params.yaml" command="load" />
+
+    <!-- # costmap local -->
+    <rosparam file="$(find pal_navigation_pkg)/param/costmap/local_costmap_params.yaml" command="load"  /> 
+
+
     
-    <!-- Map File -->
-    <arg name="map_file" default="$(find pal_navigation_pkg)/maps/demo_map.yaml"/>
-    <!-- Map Server -->
-    <!-- Publish: /map, /map_metadata -->
-    <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)" />
-
-
-    <!-- AMCL used for localization -->
-    <!-- Subscribe: /scan, /tf, /initialpose, /map -->
-    <!-- Publish: /amcl_pose, /particlecloud, /tf -->
-    <include file="$(find pal_navigation_pkg)/launch/pal_amcl_localization.launch" />
-    
-
-    <!-- Move Base Node -->
-    <!-- Subscribe: /move_base_simple/goal -->
-    <!-- Publish: /cmd_vel -->
-    <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
-
-      <rosparam file="$(find pal_navigation_pkg)/param/move_base_basic.yaml" command="load" />
-
-      <!-- # planner global -->
-      <rosparam file="$(find pal_navigation_pkg)/param/planners/Global_NavfnPlanner.yaml" command="load" />
-
-      <!-- # planner local -->
-      <rosparam file="$(find pal_navigation_pkg)/param/planners/Local_DWAPlanner.yaml" command="load" />
-
-      <!-- # costmap common -->
-      <rosparam file="$(find pal_navigation_pkg)/param/costmap/common_costmap_params.yaml" command="load" ns="global_costmap" />
-      <rosparam file="$(find pal_navigation_pkg)/param/costmap/common_costmap_params.yaml" command="load" ns="local_costmap" />
-
-      <!-- # costmap global -->
-      <rosparam file="$(find pal_navigation_pkg)/param/costmap/global_costmap_params.yaml" command="load" ns="global_costmap" />
-
-      <!-- # costmap local -->
-      <rosparam file="$(find pal_navigation_pkg)/param/costmap/local_costmap_params.yaml" command="load" ns="local_costmap" />
-
-
-      
-    </node>
-
+  </node > 
 
 </launch>
